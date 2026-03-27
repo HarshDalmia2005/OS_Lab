@@ -12,8 +12,9 @@ int fd[2];
 pid_t BP,PP;
 
 void endgame(int *board, int *player){
-    printf("Hit return to end the game...\n");
     int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+    printf("Hit return to end the game...\n");
     while ((c = getchar()) != '\n' && c != EOF);
     kill(PP,SIGUSR2);
     waitpid(PP,NULL,0);
@@ -52,12 +53,12 @@ void initialise_player(int *player){
 }
 
 void play(int *board,int *player){
-    printf("playing\n");
+    // printf("playing\n");
     kill(PP,SIGUSR1);
     char ack[20];
     read(fd[0],ack,sizeof(ack));
     if(strcmp(ack,"ack")==0){
-        printf("Board updated\n");
+        // printf("Board updated\n");
     }
 
     if(player[players]==0){

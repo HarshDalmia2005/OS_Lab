@@ -20,6 +20,8 @@ void game(int sig){
     char ply='A'+(*nextply);
 
     if(player[players]==1){
+        player[*nextply]=100;
+        player[players]--;
         printf("Player %c exits with rank=%d\n",ply,(*rank)++);
         kill(BP,SIGUSR1);
         exit(0);
@@ -51,7 +53,7 @@ void game(int sig){
         
         nextpos+=board[nextpos];
         for(int i=0;i<players;i++){
-            if(player[i]==nextpos){
+            if(nextpos!=100 && player[i]==nextpos){
                 flag=i+1; 
                 break;
             }
